@@ -74,6 +74,7 @@ int zadanie5_main() {
     log->Print(sciezka, "to powinno sie wpisac do pliku");
     log->SetState(SEVERE);
     log->Print(sciezka, "najwyzszy stan");
+    log->GetCurrentState();
 
 
 
