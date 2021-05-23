@@ -1,8 +1,8 @@
-#include <iostream>
-#include "zadanie6/zadanie6.cpp"
+#include "zadanie7/zadanie7.cpp"
+
 
 int main() {
-    zadanie6_maine();
+    zadanie7_main();
 
     return 0;
 }
