@@ -1,5 +1,7 @@
 #include <iostream>
 #include <iomanip>
+#include <cmath>
+#include <algorithm>
 
 class Macierz2D {
 private:
@@ -288,8 +290,48 @@ void Macierz2D::turnIntoIdentity() {
     }
 }
 
+bool operator<(const Macierz2D &first, const Macierz2D &second) {
+    float sumFirst = first.get11() + first.get12() + first.get13() + first.get21() + first.get22() + first.get23() + first.get31() + first.get32() + first.get33();
+    float sumSecond = second.get11() + second.get12() + second.get13() + second.get21() + second.get22() + second.get23() + second.get31() + second.get32() + second.get33();
+//    return (fabs(sumFirst - sumSecond) < 0.01f);
+    return (sumFirst < sumSecond);
+}
+
+bool operator!=(const Macierz2D &first, const Macierz2D &second) {
+    float sumFirst = first.get11() + first.get12() + first.get13() + first.get21() + first.get22() + first.get23() + first.get31() + first.get32() + first.get33();
+    float sumSecond = second.get11() + second.get12() + second.get13() + second.get21() + second.get22() + second.get23() + second.get31() + second.get32() + second.get33();
+    return fabs(sumFirst - sumSecond) > 0.01f;
+}
+
 int zadanie7_main() {
-    Macierz2D *test = new Macierz2D(3.125678);
-    std::cout << ((*test)*=5) << *test;
+    Macierz2D macierze[3];
+    macierze[0] = Macierz2D(3.1235);
+    macierze[1] = Macierz2D(4.234);
+    macierze[2] = Macierz2D(1.523);
+
+    std::cout << "Sortowanie tablicy z macierzami: \n";
+    std::cout << "przed sortowaniem: \n";
+    std::cout << "0:\n" << macierze[0] << "1:\n" << macierze[1] << "2:\n" << macierze[2];
+    std::sort(macierze, macierze + 3, operator<);
+    std::cout << "po sortowaniu: \n";
+    std::cout << "0:\n" << macierze[0] << "1:\n" << macierze[1] << "2:\n" << macierze[2];
+
+    // =--=--==--==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+    float a[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    float b[3][3] = {{0.5, 1.5, 3.2}, {5.523, 4.23, 6.12}, {1.23, 4.63, 5.36}};
+    Macierz2D first = Macierz2D(a);
+    Macierz2D second = Macierz2D(b);
+
+    std::cout << "Mnozenie macierzy: \n";
+    std::cout << "Pierwsza macierz: \n" << first;
+    std::cout << "Druga macierz: \n" << second;
+    Macierz2D res = first * second;
+    std::cout << "Wynik mnozenia macierzy: \n" << res;
+    // wynik taki sam jak w kalkulatorze
+
+
+
     return 0;
 }
